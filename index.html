@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Privacy-first tools that run entirely in your browser. No uploads, no servers. Your data stays on your device.">
+  
+  <!-- Open Graph (영문 기본 — 글로벌 공유용) -->
+  <meta property="og:title" content="Pebbly Labs — Privacy-first Browser Tools">
+  <meta property="og:description" content="Tools that run entirely in your browser. No uploads, no servers, no tracking. Built for developers and creators who care about privacy.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pebblylabs.com">
+  <meta property="og:site_name" content="Pebbly Labs">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Pebbly Labs — Privacy-first Browser Tools">
+  <meta name="twitter:description" content="Tools that run entirely in your browser. No uploads, no servers.">
+  
+  <title>Pebbly Labs</title>
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      background: #0a0a0a;
+      color: #00ff00;
+      font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      position: relative;
+    }
+    
+    /* ───── 한국어 안내 배너 (상단) ───── */
+    .ko-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 255, 0, 0.08);
+      border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+      backdrop-filter: blur(6px);
+      z-index: 20;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 10px 16px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      animation: slideDown 0.4s ease-out;
+    }
+    
+    .ko-banner.visible { display: flex; }
+    
+    .ko-banner-text { opacity: 0.9; }
+    
+    .ko-banner-btn {
+      background: #00ff00;
+      color: #0a0a0a;
+      border: none;
+      padding: 5px 12px;
+      font-family: inherit;
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    
+    .ko-banner-btn:hover { opacity: 0.85; }
+    
+    .ko-banner-close {
+      background: transparent;
+      border: none;
+      color: #00ff00;
+      cursor: pointer;
+      padding: 4px 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      opacity: 0.5;
+      transition: opacity 0.15s;
+      line-height: 1;
+    }
+    
+    .ko-banner-close:hover { opacity: 1; }
+    
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    /* ───── 언어 토글 (우상단) ───── */
+    .lang-switch {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      gap: 0;
+      border: 1px solid rgba(0, 255, 0, 0.4);
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
+      z-index: 10;
+      transition: top 0.3s;
+    }
+    
+    body.banner-visible .lang-switch {
+      top: calc(1.5rem + 44px);
+    }
+    
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: #00ff00;
+      padding: 6px 12px;
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: all 0.15s;
+      opacity: 0.5;
+    }
+    
+    .lang-btn:hover { opacity: 0.85; }
+    
+    .lang-btn.active {
+      background: #00ff00;
+      color: #0a0a0a;
+      opacity: 1;
+    }
+    
+    /* ───── 메인 콘텐츠 ───── */
+    .container {
+      max-width: 680px;
+      width: 100%;
+      transition: opacity 0.2s;
+    }
+    
+    .container.switching { opacity: 0.3; }
+    
+    .brand {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      letter-spacing: 0.35em;
+      font-weight: 900;
+      margin-bottom: 3rem;
+      opacity: 0.95;
+    }
+    
+    .line {
+      margin: 0.9rem 0;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      line-height: 1.75;
+      opacity: 0.85;
+    }
+    
+    .line::before { content: "> "; opacity: 0.5; }
+    
+    .products {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0, 255, 0, 0.2);
+    }
+    
+    .product-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      opacity: 0.5;
+      margin-bottom: 1rem;
+      font-weight: 900;
+    }
+    
+    .product-link {
+      display: inline-block;
+      font-size: 1rem;
+      color: #00ff00;
+      text-decoration: none;
+      border-bottom: 1px solid #00ff00;
+      padding: 0.3rem 0;
+      transition: all 0.2s;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    
+    .product-link:hover {
+      background: #00ff00;
+      color: #0a0a0a;
+      padding: 0.3rem 0.6rem;
+      border-bottom: none;
+    }
+    
+    .coming-soon {
+      margin-top: 3rem;
+      font-size: 0.75rem;
+      opacity: 0.35;
+      letter-spacing: 0.3em;
+      font-weight: 900;
+    }
+    
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1em;
+      background: #00ff00;
+      margin-left: 4px;
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
+    }
+    
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+    
+    /* 푸터 */
+    .footer {
+      position: fixed;
+      bottom: 1rem;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.65rem;
+      opacity: 0.3;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+    }
+    
+    /* 모바일 대응 */
+    @media (max-width: 640px) {
+      .ko-banner {
+        font-size: 0.7rem;
+        gap: 8px;
+        padding: 8px 12px;
+      }
+      .ko-banner-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex-shrink: 1;
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+  <!-- 한국어 안내 배너 -->
+  <div class="ko-banner" id="koBanner" role="banner">
+    <span class="ko-banner-text">💬 이 페이지를 한국어로 볼 수 있습니다</span>
+    <button class="ko-banner-btn" id="koBannerAccept">VIEW IN KOREAN</button>
+    <button class="ko-banner-close" id="koBannerClose" aria-label="Close">×</button>
+  </div>
+  
+  <!-- 언어 토글 -->
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="ko">KO</button>
+  </div>
+  
+  <!-- 컨테이너 -->
+  <div class="container" id="container">
+    
+    <h1 class="brand">// PEBBLY LABS</h1>
+    
+    <p class="line" 
+       data-en="We build privacy-first tools that run entirely in your browser"
+       data-ko="브라우저에서 바로 작동하는 프라이버시-퍼스트 도구를 만듭니다">
+      We build privacy-first tools that run entirely in your browser
+    </p>
+    
+    <p class="line"
+       data-en="No uploads. No servers. Your data stays on your device"
+       data-ko="업로드 없음. 서버 없음. 데이터는 당신의 기기에만 머뭅니다">
+      No uploads. No servers. Your data stays on your device
+    </p>
+    
+    <p class="line"
+       data-en="Open · Developer-friendly · Free to start"
+       data-ko="오픈 · 개발자 친화적 · 무료로 시작">
+      Open · Developer-friendly · Free to start
+    </p>
+    
+    <div class="products">
+      <div class="product-label">// LIVE_PRODUCTS</div>
+      <a href="https://toolkit.pebblylabs.com" class="product-link">
+        Pebbly Toolkit → Pixel Remover
+      </a>
+    </div>
+    
+    <div class="coming-soon">
+      MORE_TOOLS_COMING<span class="cursor"></span>
+    </div>
+    
+  </div>
+  
+  <!-- 푸터 -->
+  <div class="footer" 
+       data-en="© 2026 PEBBLY LABS · PRIVACY BY DEFAULT"
+       data-ko="© 2026 PEBBLY LABS · 프라이버시를 기본으로">
+    © 2026 PEBBLY LABS · PRIVACY BY DEFAULT
+  </div>
+  
+  <script>
+    const LANG_KEY = 'pebbly-lang';
+    const BANNER_KEY = 'pebbly-banner-dismissed';
+    
+    const container = document.getElementById('container');
+    const langBtns = document.querySelectorAll('.lang-btn');
+    const koBanner = document.getElementById('koBanner');
+    const koBannerAccept = document.getElementById('koBannerAccept');
+    const koBannerClose = document.getElementById('koBannerClose');
+    
+    function applyLanguage(lang, animate = true) {
+      if (animate) container.classList.add('switching');
+      
+      setTimeout(() => {
+        document.querySelectorAll('[data-en]').forEach(el => {
+          const newText = el.dataset[lang];
+          if (newText) {
+            const cursor = el.querySelector('.cursor');
+            el.textContent = newText;
+            if (cursor) el.appendChild(cursor);
+          }
+        });
+        
+        document.documentElement.lang = lang;
+        
+        langBtns.forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        
+        if (animate) container.classList.remove('switching');
+      }, animate ? 150 : 0);
+    }
+    
+    function selectLanguage(lang) {
+      localStorage.setItem(LANG_KEY, lang);
+      applyLanguage(lang);
+      hideBanner();
+    }
+    
+    function showBanner() {
+      koBanner.classList.add('visible');
+      document.body.classList.add('banner-visible');
+    }
+    
+    function hideBanner() {
+      koBanner.classList.remove('visible');
+      document.body.classList.remove('banner-visible');
+    }
+    
+    function shouldShowBanner() {
+      if (localStorage.getItem(LANG_KEY)) return false;
+      if (localStorage.getItem(BANNER_KEY)) return false;
+      const browserLang = (navigator.language || 'en').toLowerCase();
+      return browserLang.startsWith('ko');
+    }
+    
+    langBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectLanguage(btn.dataset.lang);
+      });
+    });
+    
+    koBannerAccept.addEventListener('click', () => {
+      selectLanguage('ko');
+    });
+    
+    koBannerClose.addEventListener('click', () => {
+      localStorage.setItem(BANNER_KEY, '1');
+      hideBanner();
+    });
+    
+    const savedLang = localStorage.getItem(LANG_KEY);
+    if (savedLang === 'ko') {
+      applyLanguage('ko', false);
+    }
+    
+    if (shouldShowBanner()) {
+      setTimeout(showBanner, 400);
+    }
+  </script>
+  
+</body>
+</html>
