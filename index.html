@@ -79,7 +79,6 @@
     }
     
     .ko-banner.visible { display: flex; }
-    
     .ko-banner-text { opacity: 0.9; }
     
     .ko-banner-btn {
@@ -217,6 +216,136 @@
       border-bottom: none;
     }
     
+    /* ───── NEW: Coming Next 섹션 (Mouse) - Variant B (label outside box) ───── */
+    .coming-next-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0, 255, 0, 0.2);
+    }
+    
+    /* Label like .product-label (// LIVE_PRODUCTS) - same style */
+    .coming-next-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      opacity: 0.5;
+      margin-bottom: 1rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    
+    .coming-next-label::before {
+      content: "●";
+      color: #00ff00;
+      animation: pulse 2s infinite;
+      font-size: 0.6rem;
+    }
+    
+    .coming-next-tag {
+      background: rgba(0, 255, 0, 0.15);
+      border: 1px solid rgba(0, 255, 0, 0.4);
+      color: #00ff00;
+      padding: 2px 8px;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      font-weight: 900;
+      margin-left: auto;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    
+    /* The box itself */
+    .coming-next {
+      display: block;
+      padding: 1.2rem 1.5rem;
+      border: 1px dashed rgba(0, 255, 0, 0.3);
+      background: linear-gradient(135deg, rgba(0, 255, 0, 0.03), rgba(0, 170, 255, 0.03));
+      transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .coming-next:hover {
+      border-color: #00ff00;
+      border-style: solid;
+      background: linear-gradient(135deg, rgba(0, 255, 0, 0.06), rgba(0, 170, 255, 0.06));
+    }
+    
+    .coming-next-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .coming-next-bot {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      animation: botBob 2s ease-in-out infinite;
+    }
+    
+    .coming-next-bot svg {
+      width: 100%;
+      height: 100%;
+      image-rendering: pixelated;
+      shape-rendering: crispEdges;
+    }
+    
+    @keyframes botBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    
+    .coming-next-info {
+      flex: 1;
+    }
+    
+    .coming-next-title {
+      font-size: 1rem;
+      color: #00ff00;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+    
+    .coming-next-desc {
+      font-size: 0.75rem;
+      opacity: 0.6;
+      letter-spacing: 0.05em;
+      line-height: 1.5;
+    }
+    
+    .coming-next-arrow {
+      color: #00ff00;
+      font-size: 1.2rem;
+      opacity: 0.5;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    
+    .coming-next:hover .coming-next-arrow {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+    
+    .coming-next-meta {
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed rgba(0, 255, 0, 0.15);
+      font-size: 0.7rem;
+      opacity: 0.45;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+    }
+    
+    /* ───────────────────────────────────────── */
+    
     .coming-soon {
       margin-top: 3rem;
       font-size: 0.75rem;
@@ -316,6 +445,55 @@
       </a>
     </div>
     
+    <!-- ╔══ NEW: COMING_NEXT 섹션 (Pixel Mouse 비전) - Variant B v2 ══╗ -->
+    <div class="coming-next-section">
+      <div class="coming-next-label">
+        <span data-en="// COMING_NEXT" data-ko="// COMING_NEXT">// COMING_NEXT</span>
+        <span class="coming-next-tag" data-en="PREVIEW" data-ko="프리뷰">PREVIEW</span>
+      </div>
+      <a href="https://mouse.pebblylabs.com" class="coming-next">
+        <div class="coming-next-row">
+          <div class="coming-next-bot">
+            <svg viewBox="-1 -1 15 16">
+              <rect x="2" y="0" width="9" height="1" fill="#00ff00"/>
+              <rect x="1" y="1" width="11" height="5" fill="#00ff00"/>
+              <rect x="0" y="6" width="13" height="1" fill="#00ff00"/>
+              <rect x="0" y="7" width="1" height="4" fill="#00ff00"/>
+              <rect x="2" y="7" width="9" height="4" fill="#00ff00"/>
+              <rect x="12" y="7" width="1" height="4" fill="#00ff00"/>
+              <rect x="0" y="11" width="13" height="1" fill="#00ff00"/>
+              <rect x="3" y="12" width="2" height="2" fill="#00ff00"/>
+              <rect x="8" y="12" width="2" height="2" fill="#00ff00"/>
+              <rect x="3" y="2" width="2" height="2" fill="#ffffff"/>
+              <rect x="3" y="3" width="2" height="1" fill="#00aaff"/>
+              <rect x="8" y="2" width="2" height="2" fill="#ffffff"/>
+              <rect x="8" y="3" width="2" height="1" fill="#00aaff"/>
+              <rect x="4" y="5" width="5" height="1" fill="#007700"/>
+            </svg>
+          </div>
+          <div class="coming-next-info">
+            <div class="coming-next-title"
+                 data-en="Pebbly Pixel Mouse"
+                 data-ko="Pebbly Pixel Mouse">
+              Pebbly Pixel Mouse
+            </div>
+            <div class="coming-next-desc"
+                 data-en="Desktop automation companion. Walking pixel character that records your macros."
+                 data-ko="데스크탑 자동화 컴패니언. 매크로를 기록해주는 걸어다니는 픽셀 캐릭터.">
+              Desktop automation companion. Walking pixel character that records your macros.
+            </div>
+          </div>
+          <div class="coming-next-arrow">→</div>
+        </div>
+        <div class="coming-next-meta"
+             data-en="LATE 2026 · BUILDING IN PUBLIC · WAITLIST OPEN"
+             data-ko="2026년 하반기 · 공개 개발 · 웨이팅 리스트 오픈">
+          LATE 2026 · BUILDING IN PUBLIC · WAITLIST OPEN
+        </div>
+      </a>
+    </div>
+    <!-- ╚══════════════════════════════════════════╝ -->
+    
     <div class="coming-soon">
       MORE_TOOLS_COMING<span class="cursor"></span>
     </div>
@@ -347,8 +525,18 @@
           const newText = el.dataset[lang];
           if (newText) {
             const cursor = el.querySelector('.cursor');
+            const bot = el.querySelector('.coming-next-bot');
+            
+            // For elements with child nodes we want to preserve, only update text
+            if (el.querySelector('span[data-en]')) {
+              return; // skip parents that contain translatable children
+            }
+            
+            // Save children we want to keep
+            const childToKeep = bot || cursor;
+            
             el.textContent = newText;
-            if (cursor) el.appendChild(cursor);
+            if (childToKeep) el.appendChild(childToKeep);
           }
         });
         
